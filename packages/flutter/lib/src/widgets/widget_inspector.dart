@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as developer;
@@ -1466,7 +1465,7 @@ mixin WidgetInspectorService {
     if (location == null || location.file == null) {
       return false;
     }
-    final String file = Uri.parse(location.file!).path;
+    final String file = Uri.parse(location.file).path;
 
     // By default check whether the creation location was within package:flutter.
     if (_pubRootDirectories == null) {
@@ -2063,7 +2062,7 @@ class _ElementLocationStatsTracker {
       for (final _LocationCount entry in newLocations) {
         final _Location location = entry.location;
         final List<int> jsonForFile = locationsJson.putIfAbsent(
-          location.file!,
+          location.file,
           () => <int>[],
         );
         jsonForFile..add(entry.id)..add(location.line)..add(location.column);
@@ -2078,7 +2077,7 @@ class _ElementLocationStatsTracker {
 
 class _WidgetForTypeTests extends Widget {
   @override
-  Element createElement() => throw Error();
+  Element createElement() => throw UnimplementedError();
 }
 
 /// A widget that enables inspecting the child widget's structure.
@@ -2781,7 +2780,7 @@ class _Location {
   });
 
   /// File path of the location.
-  final String? file;
+  final String file;
 
   /// 1-based line number.
   final int line;
@@ -2816,9 +2815,7 @@ class _Location {
     if (name != null) {
       parts.add(name!);
     }
-    if (file != null) {
-      parts.add(file!);
-    }
+    parts.add(file);
     parts..add('$line')..add('$column');
     return parts.join(':');
   }

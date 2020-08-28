@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/services.dart';
 import 'framework.dart';
 
@@ -258,7 +257,7 @@ class AutofillGroupState extends State<AutofillGroup> with AutofillScopeMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _isTopmostAutofillGroup = AutofillGroup.of(context!) == null;
+    _isTopmostAutofillGroup = AutofillGroup.of(context) == null;
   }
 
   @override
@@ -289,7 +288,7 @@ class AutofillGroupState extends State<AutofillGroup> with AutofillScopeMixin {
 class _AutofillScope extends InheritedWidget {
   const _AutofillScope({
     Key? key,
-    Widget? child,
+    required Widget child,
     AutofillGroupState? autofillScopeState,
   }) : _scope = autofillScopeState,
        super(key: key, child: child);

@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 import 'dart:ui' show Locale;
 
@@ -230,7 +229,7 @@ class _LocalizationsScope extends InheritedWidget {
     required this.locale,
     required this.localizationsState,
     required this.typeToResources,
-    Widget? child,
+    required Widget child,
   }) : assert(localizationsState != null),
        assert(typeToResources != null),
        super(key: key, child: child);

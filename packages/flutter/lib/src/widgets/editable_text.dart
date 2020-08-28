@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui hide TextStyle;
@@ -1518,7 +1517,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final AutofillGroupState? newAutofillGroup = AutofillGroup.of(context!);
+    final AutofillGroupState? newAutofillGroup = AutofillGroup.of(context);
     if (currentAutofillScope != newAutofillGroup) {
       _currentAutofillScope?.unregister(autofillId);
       _currentAutofillScope = newAutofillGroup;
@@ -1530,7 +1529,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       _didAutoFocus = true;
       SchedulerBinding.instance!.addPostFrameCallback((_) {
         if (mounted) {
-          FocusScope.of(context!).autofocus(widget.focusNode);
+          FocusScope.of(context).autofocus(widget.focusNode);
         }
       });
     }
@@ -1864,8 +1863,8 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     // the ascent.
     final double targetOffset = (additionalOffset + _scrollController!.offset)
       .clamp(
-        _scrollController!.position.minScrollExtent!,
-        _scrollController!.position.maxScrollExtent!,
+        _scrollController!.position.minScrollExtent,
+        _scrollController!.position.maxScrollExtent,
       );
 
     final double offsetDelta = _scrollController!.offset - targetOffset;
@@ -1992,7 +1991,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     if (widget.selectionControls != null) {
       _selectionOverlay = TextSelectionOverlay(
         clipboardStatus: _clipboardStatus,
-        context: context!,
+        context: context,
         value: _value,
         debugRequiredFor: widget,
         toolbarLayerLink: _toolbarLayerLink,
@@ -2269,7 +2268,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
   }
 
   TextDirection get _textDirection {
-    final TextDirection? result = widget.textDirection ?? Directionality.of(context!);
+    final TextDirection? result = widget.textDirection ?? Directionality.of(context);
     assert(result != null, '$runtimeType created without a textDirection and with no ambient Directionality.');
     return result!;
   }
@@ -2283,7 +2282,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
   @override
   TextEditingValue get textEditingValue => _value;
 
-  double get _devicePixelRatio => MediaQuery.of(context!)?.devicePixelRatio ?? 1.0;
+  double get _devicePixelRatio => MediaQuery.of(context)?.devicePixelRatio ?? 1.0;
 
   @override
   set textEditingValue(TextEditingValue value) {

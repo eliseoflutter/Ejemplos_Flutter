@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:ui' as ui show Image, ImageFilter, TextHeightBehavior;
 
 import 'package:flutter/foundation.dart';
@@ -3481,7 +3480,7 @@ class Positioned extends ParentDataWidget<StackParentData> {
     this.bottom,
     this.width,
     this.height,
-    required Widget? child,
+    required Widget child,
   }) : assert(left == null || right == null || width == null),
        assert(top == null || bottom == null || height == null),
        super(key: key, child: child);

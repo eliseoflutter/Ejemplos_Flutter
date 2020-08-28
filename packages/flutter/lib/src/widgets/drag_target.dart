@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -380,7 +379,7 @@ class _DraggableState<T extends Object> extends State<Draggable<T>> {
     Offset dragStartPoint;
     switch (widget.dragAnchor) {
       case DragAnchor.child:
-        final RenderBox renderObject = context!.findRenderObject() as RenderBox;
+        final RenderBox renderObject = context.findRenderObject() as RenderBox;
         dragStartPoint = renderObject.globalToLocal(position);
         break;
       case DragAnchor.pointer:
@@ -391,7 +390,7 @@ class _DraggableState<T extends Object> extends State<Draggable<T>> {
       _activeCount += 1;
     });
     final _DragAvatar<T> avatar = _DragAvatar<T>(
-      overlayState: Overlay.of(context!, debugRequiredFor: widget)!,
+      overlayState: Overlay.of(context, debugRequiredFor: widget)!,
       data: widget.data,
       axis: widget.axis,
       initialPosition: position,
@@ -764,7 +763,7 @@ class _DragAvatar<T extends Object> extends Drag {
   }
 
   Widget _build(BuildContext context) {
-    final RenderBox box = overlayState.context!.findRenderObject() as RenderBox;
+    final RenderBox box = overlayState.context.findRenderObject() as RenderBox;
     final Offset overlayTopLeft = box.localToGlobal(Offset.zero);
     return Positioned(
       left: _lastOffset!.dx - overlayTopLeft.dx,

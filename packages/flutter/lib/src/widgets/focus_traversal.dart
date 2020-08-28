@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -719,7 +718,7 @@ mixin DirectionalFocusTraversalPolicyMixin on FocusTraversalPolicy {
           focusedChild.rect,
           nearestScope.traversalDescendants,
         );
-        if (focusedScrollable != null && !focusedScrollable.position!.atEdge) {
+        if (focusedScrollable != null && !focusedScrollable.position.atEdge) {
           final Iterable<FocusNode> filteredEligibleNodes = eligibleNodes!.where((FocusNode node) => Scrollable.of(node.context!) == focusedScrollable);
           if (filteredEligibleNodes.isNotEmpty) {
             eligibleNodes = filteredEligibleNodes;
@@ -751,7 +750,7 @@ mixin DirectionalFocusTraversalPolicyMixin on FocusTraversalPolicy {
       case TraversalDirection.right:
       case TraversalDirection.left:
         Iterable<FocusNode>? eligibleNodes = _sortAndFilterHorizontally(direction, focusedChild.rect, nearestScope);
-        if (focusedScrollable != null && !focusedScrollable.position!.atEdge) {
+        if (focusedScrollable != null && !focusedScrollable.position.atEdge) {
           final Iterable<FocusNode> filteredEligibleNodes = eligibleNodes!.where((FocusNode node) => Scrollable.of(node.context!) == focusedScrollable);
           if (filteredEligibleNodes.isNotEmpty) {
             eligibleNodes = filteredEligibleNodes;
@@ -1395,7 +1394,7 @@ class OrderedTraversalPolicy extends FocusTraversalPolicy with DirectionalFocusT
 /// [FocusTraversalOrder.of] for a particular context.
 class FocusTraversalOrder extends InheritedWidget {
   /// A const constructor so that subclasses can be const.
-  const FocusTraversalOrder({Key? key, this.order, Widget? child}) : super(key: key, child: child);
+  const FocusTraversalOrder({Key? key, this.order, required Widget child}) : super(key: key, child: child);
 
   /// The order for the widget descendants of this [FocusTraversalOrder].
   final FocusOrder? order;
@@ -1755,7 +1754,7 @@ class _FocusTraversalGroupMarker extends InheritedWidget {
   const _FocusTraversalGroupMarker({
     required this.policy,
     required this.focusNode,
-    Widget? child,
+    required Widget child,
   })  : assert(policy != null),
         assert(focusNode != null),
         super(child: child);

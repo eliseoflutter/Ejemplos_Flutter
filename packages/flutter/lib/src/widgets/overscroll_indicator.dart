@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async' show Timer;
 import 'dart:math' as math;
 
@@ -258,9 +257,9 @@ class _GlowingOverscrollIndicatorState extends State<GlowingOverscrollIndicator>
     // in this case, we should move the glow up 10.0 pixels and should not
     // overflow the scrollable widget's edge. https://github.com/flutter/flutter/issues/64149.
     _leadingController!._paintOffsetScrollPixels =
-      -math.min(notification.metrics.pixels! - notification.metrics.minScrollExtent!, _leadingController!._paintOffset);
+      -math.min(notification.metrics.pixels - notification.metrics.minScrollExtent, _leadingController!._paintOffset);
     _trailingController!._paintOffsetScrollPixels =
-      -math.min(notification.metrics.maxScrollExtent! - notification.metrics.pixels!, _trailingController!._paintOffset);
+      -math.min(notification.metrics.maxScrollExtent - notification.metrics.pixels, _trailingController!._paintOffset);
 
     if (notification is OverscrollNotification) {
       _GlowController? controller;

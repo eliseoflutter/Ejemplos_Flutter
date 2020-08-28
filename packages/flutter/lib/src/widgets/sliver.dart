@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:collection' show SplayTreeMap, HashMap;
 
 import 'package:flutter/foundation.dart';
@@ -439,18 +438,19 @@ class SliverChildBuilderDelegate extends SliverChildDelegate {
   }
 
   @override
-  Widget? build(BuildContext? context, int index) {
+  Widget? build(BuildContext context, int index) {
     assert(builder != null);
     if (index < 0 || (childCount != null && index >= childCount!))
       return null;
-    Widget? child;
+    Widget child;
     try {
       child = builder(context, index);
     } catch (exception, stackTrace) {
       child = _createErrorWidget(exception, stackTrace);
     }
-    if (child == null)
+    if (child == null) { // ignore: dead_code
       return null;
+    }
     final Key? key = child.key != null ? _SaltedValueKey(child.key!) : null;
     if (addRepaintBoundaries)
       child = RepaintBoundary(child: child);

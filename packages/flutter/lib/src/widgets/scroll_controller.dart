@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 
 import 'package:flutter/animation.dart';
@@ -116,7 +115,7 @@ class ScrollController extends ChangeNotifier {
   /// The current scroll offset of the scrollable widget.
   ///
   /// Requires the controller to be controlling exactly one scrollable widget.
-  double get offset => position.pixels!;
+  double get offset => position.pixels;
 
   /// Animates the position from its current value to the given value.
   ///

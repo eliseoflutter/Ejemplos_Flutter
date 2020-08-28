@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/gestures.dart';
 
 import 'automatic_keep_alive.dart';
@@ -269,7 +268,7 @@ class _DismissibleState extends State<Dismissible> with TickerProviderStateMixin
     if (extent == 0.0)
       return null;
     if (_directionIsXAxis) {
-      switch (Directionality.of(context!)!) {
+      switch (Directionality.of(context)!) {
         case TextDirection.rtl:
           return extent < 0 ? DismissDirection.startToEnd : DismissDirection.endToStart;
         case TextDirection.ltr:
@@ -286,7 +285,7 @@ class _DismissibleState extends State<Dismissible> with TickerProviderStateMixin
   }
 
   double get _overallDragAxisExtent {
-    final Size size = context!.size!;
+    final Size size = context.size!;
     return _directionIsXAxis ? size.width : size.height;
   }
 
@@ -327,7 +326,7 @@ class _DismissibleState extends State<Dismissible> with TickerProviderStateMixin
         break;
 
       case DismissDirection.endToStart:
-        switch (Directionality.of(context!)!) {
+        switch (Directionality.of(context)!) {
           case TextDirection.rtl:
             if (_dragExtent + delta > 0)
               _dragExtent += delta;
@@ -340,7 +339,7 @@ class _DismissibleState extends State<Dismissible> with TickerProviderStateMixin
         break;
 
       case DismissDirection.startToEnd:
-        switch (Directionality.of(context!)!) {
+        switch (Directionality.of(context)!) {
           case TextDirection.rtl:
             if (_dragExtent + delta < 0)
               _dragExtent += delta;
@@ -479,7 +478,7 @@ class _DismissibleState extends State<Dismissible> with TickerProviderStateMixin
         ..addStatusListener((AnimationStatus status) => updateKeepAlive());
       _resizeController!.forward();
       setState(() {
-        _sizePriorToCollapse = context!.size;
+        _sizePriorToCollapse = context.size;
         _resizeAnimation = _resizeController!.drive(
           CurveTween(
             curve: _kResizeTimeCurve

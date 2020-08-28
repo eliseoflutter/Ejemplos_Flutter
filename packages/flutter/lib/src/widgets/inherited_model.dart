@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
@@ -98,7 +97,7 @@ abstract class InheritedModel<T> extends InheritedWidget {
   /// Creates an inherited widget that supports dependencies qualified by
   /// "aspects", i.e. a descendant widget can indicate that it should
   /// only be rebuilt if a specific aspect of the model changes.
-  const InheritedModel({ Key? key, Widget? child }) : super(key: key, child: child);
+  const InheritedModel({ Key? key, required Widget child }) : super(key: key, child: child);
 
   @override
   InheritedModelElement<T> createElement() => InheritedModelElement<T>(this);

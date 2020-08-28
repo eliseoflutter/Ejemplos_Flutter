@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/foundation.dart';
 
 import 'framework.dart';
@@ -183,7 +182,7 @@ class _InheritedNotifierElement<T extends Listenable> extends InheritedElement {
   }
 
   @override
-  Widget? build() {
+  Widget build() {
     if (_dirty)
       notifyClients(widget);
     return super.build();

@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -23,7 +22,7 @@ class TickerMode extends StatelessWidget {
   const TickerMode({
     Key? key,
     required this.enabled,
-    this.child,
+    required this.child,
   }) : assert(enabled != null),
        super(key: key);
 
@@ -43,7 +42,7 @@ class TickerMode extends StatelessWidget {
   /// The widget below this widget in the tree.
   ///
   /// {@macro flutter.widgets.child}
-  final Widget? child;
+  final Widget child;
 
   /// Whether tickers in the given subtree should be enabled or disabled.
   ///
@@ -82,7 +81,7 @@ class _EffectiveTickerMode extends InheritedWidget {
   const _EffectiveTickerMode({
     Key? key,
     required this.enabled,
-    Widget? child,
+    required Widget child,
   }) : assert(enabled != null),
         super(key: key, child: child);
 
@@ -161,7 +160,7 @@ mixin SingleTickerProviderStateMixin<T extends StatefulWidget> on State<T> imple
   @override
   void didChangeDependencies() {
     if (_ticker != null)
-      _ticker!.muted = !TickerMode.of(context!);
+      _ticker!.muted = !TickerMode.of(context);
     super.didChangeDependencies();
   }
 
@@ -241,7 +240,7 @@ mixin TickerProviderStateMixin<T extends StatefulWidget> on State<T> implements 
 
   @override
   void didChangeDependencies() {
-    final bool muted = !TickerMode.of(context!);
+    final bool muted = !TickerMode.of(context);
     if (_tickers != null) {
       for (final Ticker ticker in _tickers!) {
         ticker.muted = muted;

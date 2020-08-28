@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
@@ -1228,9 +1227,9 @@ class ListView extends BoxScrollView {
        assert(itemCount != null && itemCount >= 0),
        itemExtent = null,
        childrenDelegate = SliverChildBuilderDelegate(
-         (BuildContext? context, int index) {
+         (BuildContext context, int index) {
            final int itemIndex = index ~/ 2;
-           Widget? widget;
+           Widget widget;
            if (index.isEven) {
              widget = itemBuilder(context, itemIndex);
            } else {

@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 import 'dart:collection';
 import 'dart:math' as math;
@@ -309,10 +308,10 @@ class FixedExtentMetrics extends FixedScrollMetrics {
   /// Creates an immutable snapshot of values associated with a
   /// [ListWheelScrollView].
   FixedExtentMetrics({
-    required double? minScrollExtent,
-    required double? maxScrollExtent,
-    required double? pixels,
-    required double? viewportDimension,
+    required double minScrollExtent,
+    required double maxScrollExtent,
+    required double pixels,
+    required double viewportDimension,
     required AxisDirection axisDirection,
     required this.itemIndex,
   }) : super(
@@ -396,10 +395,10 @@ class _FixedExtentScrollPosition extends ScrollPositionWithSingleContext impleme
   @override
   int get itemIndex {
     return _getItemFromOffset(
-      offset: pixels!,
+      offset: pixels,
       itemExtent: itemExtent,
-      minScrollExtent: minScrollExtent!,
-      maxScrollExtent: maxScrollExtent!,
+      minScrollExtent: minScrollExtent,
+      maxScrollExtent: maxScrollExtent,
     );
   }
 
@@ -491,8 +490,8 @@ class FixedExtentScrollPhysics extends ScrollPhysics {
     // Scenario 1:
     // If we're out of range and not headed back in range, defer to the parent
     // ballistics, which should put us back in range at the scrollable's boundary.
-    if ((velocity <= 0.0 && metrics.pixels! <= metrics.minScrollExtent!) ||
-        (velocity >= 0.0 && metrics.pixels! >= metrics.maxScrollExtent!)) {
+    if ((velocity <= 0.0 && metrics.pixels <= metrics.minScrollExtent) ||
+        (velocity >= 0.0 && metrics.pixels >= metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
@@ -514,10 +513,10 @@ class FixedExtentScrollPhysics extends ScrollPhysics {
     // From the natural final position, find the nearest item it should have
     // settled to.
     final int settlingItemIndex = _getItemFromOffset(
-      offset: testFrictionSimulation?.x(double.infinity) ?? metrics.pixels!,
+      offset: testFrictionSimulation?.x(double.infinity) ?? metrics.pixels,
       itemExtent: metrics.itemExtent,
-      minScrollExtent: metrics.minScrollExtent!,
-      maxScrollExtent: metrics.maxScrollExtent!,
+      minScrollExtent: metrics.minScrollExtent,
+      maxScrollExtent: metrics.maxScrollExtent,
     );
 
     final double settlingPixels = settlingItemIndex * metrics.itemExtent;
@@ -526,7 +525,7 @@ class FixedExtentScrollPhysics extends ScrollPhysics {
     // If there's no velocity and we're already at where we intend to land,
     // do nothing.
     if (velocity.abs() < tolerance.velocity
-        && (settlingPixels - metrics.pixels!).abs() < tolerance.distance) {
+        && (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
       return null;
     }
 
@@ -536,7 +535,7 @@ class FixedExtentScrollPhysics extends ScrollPhysics {
     if (settlingItemIndex == metrics.itemIndex) {
       return SpringSimulation(
         spring,
-        metrics.pixels!,
+        metrics.pixels,
         settlingPixels,
         velocity,
         tolerance: tolerance,
@@ -547,7 +546,7 @@ class FixedExtentScrollPhysics extends ScrollPhysics {
     // Create a new friction simulation except the drag will be tweaked to land
     // exactly on the item closest to the natural stopping point.
     return FrictionSimulation.through(
-      metrics.pixels!,
+      metrics.pixels,
       settlingPixels,
       velocity,
       tolerance.velocity * velocity.sign,

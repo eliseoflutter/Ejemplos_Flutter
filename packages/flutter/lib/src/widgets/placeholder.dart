@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/rendering.dart';
 
 import 'basic.dart';
@@ -38,7 +37,7 @@ class _PlaceholderPainter extends CustomPainter {
   }
 
   @override
-  bool hitTest(Offset? position) => false;
+  bool hitTest(Offset position) => false;
 }
 
 /// A widget that draws a box that represents where other widgets will one day

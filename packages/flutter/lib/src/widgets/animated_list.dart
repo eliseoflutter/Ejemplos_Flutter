@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -15,10 +14,10 @@ import 'sliver.dart';
 import 'ticker_provider.dart';
 
 /// Signature for the builder callback used by [AnimatedList].
-typedef AnimatedListItemBuilder = Widget Function(BuildContext? context, int index, Animation<double> animation);
+typedef AnimatedListItemBuilder = Widget Function(BuildContext context, int index, Animation<double> animation);
 
 /// Signature for the builder callback used by [AnimatedListState.removeItem].
-typedef AnimatedListRemovedItemBuilder = Widget Function(BuildContext? context, Animation<double> animation);
+typedef AnimatedListRemovedItemBuilder = Widget Function(BuildContext context, Animation<double> animation);
 
 // The default insert/remove animation duration.
 const Duration _kDuration = Duration(milliseconds: 300);
@@ -970,7 +969,7 @@ class SliverAnimatedListState extends State<SliverAnimatedList> with TickerProvi
     });
   }
 
-  Widget _itemBuilder(BuildContext? context, int itemIndex) {
+  Widget _itemBuilder(BuildContext context, int itemIndex) {
     final _ActiveItem? outgoingItem = _activeItemAt(_outgoingItems, itemIndex);
     if (outgoingItem != null) {
       return outgoingItem.removedItemBuilder!(

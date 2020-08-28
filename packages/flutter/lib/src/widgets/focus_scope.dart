@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/foundation.dart';
 
 import 'basic.dart';
@@ -579,7 +578,7 @@ class _FocusState extends State<Focus> {
 
   void _handleAutofocus() {
     if (!_didAutofocus && widget.autofocus) {
-      FocusScope.of(context!).autofocus(focusNode);
+      FocusScope.of(context).autofocus(focusNode);
       _didAutofocus = true;
     }
   }

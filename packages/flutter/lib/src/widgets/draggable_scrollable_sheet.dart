@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 
@@ -305,7 +304,7 @@ class _DraggableScrollableSheetState extends State<DraggableScrollableSheet> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_InheritedResetNotifier.shouldReset(context!)) {
+    if (_InheritedResetNotifier.shouldReset(context)) {
       // jumpTo can result in trying to replace semantics during build.
       // Just animate really fast.
       // Avoid doing it at all if the offset is already 0.0.
@@ -431,7 +430,7 @@ class _DraggableScrollableSheetScrollPosition
 
   VoidCallback? _dragCancelCallback;
   final _DraggableSheetExtent extent;
-  bool get listShouldScroll => pixels! > 0.0;
+  bool get listShouldScroll => pixels > 0.0;
 
   @override
   bool applyContentDimensions(double minScrollExtent, double maxScrollExtent) {

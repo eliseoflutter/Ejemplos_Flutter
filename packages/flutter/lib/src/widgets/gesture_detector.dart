@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
@@ -1123,7 +1122,7 @@ class RawGestureDetectorState extends State<RawGestureDetector> {
   /// that value until the next build.
   void replaceGestureRecognizers(Map<Type, GestureRecognizerFactory> gestures) {
     assert(() {
-      if (!context!.findRenderObject()!.owner!.debugDoingLayout) {
+      if (!context.findRenderObject()!.owner!.debugDoingLayout) {
         throw FlutterError.fromParts(<DiagnosticsNode>[
           ErrorSummary('Unexpected call to replaceGestureRecognizers() method of RawGestureDetectorState.'),
           ErrorDescription('The replaceGestureRecognizers() method can only be called during the layout phase.'),
@@ -1138,7 +1137,7 @@ class RawGestureDetectorState extends State<RawGestureDetector> {
     }());
     _syncAll(gestures);
     if (!widget.excludeFromSemantics) {
-      final RenderSemanticsGestureHandler semanticsGestureHandler = context!.findRenderObject() as RenderSemanticsGestureHandler;
+      final RenderSemanticsGestureHandler semanticsGestureHandler = context.findRenderObject() as RenderSemanticsGestureHandler;
       _updateSemanticsForRenderObject(semanticsGestureHandler);
     }
   }
@@ -1158,7 +1157,7 @@ class RawGestureDetectorState extends State<RawGestureDetector> {
     if (widget.excludeFromSemantics)
       return;
 
-    final RenderSemanticsGestureHandler? semanticsGestureHandler = context!.findRenderObject() as RenderSemanticsGestureHandler?;
+    final RenderSemanticsGestureHandler? semanticsGestureHandler = context.findRenderObject() as RenderSemanticsGestureHandler?;
     assert(() {
       if (semanticsGestureHandler == null) {
         throw FlutterError(

@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
@@ -450,7 +449,7 @@ class Shortcuts extends StatefulWidget {
 
 class _ShortcutsState extends State<Shortcuts> {
   ShortcutManager? _internalManager;
-  ShortcutManager? get manager => widget.manager ?? _internalManager;
+  ShortcutManager get manager => widget.manager ?? _internalManager!;
 
   @override
   void dispose() {
@@ -464,7 +463,7 @@ class _ShortcutsState extends State<Shortcuts> {
     if (widget.manager == null) {
       _internalManager = ShortcutManager();
     }
-    manager!.shortcuts = widget.shortcuts;
+    manager.shortcuts = widget.shortcuts;
   }
 
   @override
@@ -478,14 +477,14 @@ class _ShortcutsState extends State<Shortcuts> {
         _internalManager ??= ShortcutManager();
       }
     }
-    manager!.shortcuts = widget.shortcuts;
+    manager.shortcuts = widget.shortcuts;
   }
 
   bool _handleOnKey(FocusNode node, RawKeyEvent event) {
     if (node.context == null) {
       return false;
     }
-    return manager!.handleKeypress(node.context!, event) || manager!.modal;
+    return manager.handleKeypress(node.context!, event) || manager.modal;
   }
 
   @override
@@ -495,7 +494,7 @@ class _ShortcutsState extends State<Shortcuts> {
       canRequestFocus: false,
       onKey: _handleOnKey,
       child: _ShortcutsMarker(
-        manager: manager!,
+        manager: manager,
         child: widget.child,
       ),
     );
