@@ -75,7 +75,7 @@ class Form extends StatefulWidget {
   /// The [child] argument must not be null.
   const Form({
     Key? key,
-    @required this.child,
+    required this.child,
     @Deprecated(
       'Use autoValidateMode parameter which provide more specific '
       'behaviour related to auto validation. '

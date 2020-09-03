@@ -395,7 +395,7 @@ class Container extends StatelessWidget {
       current = ClipPath(
         clipper: _DecorationClipper(
           textDirection: Directionality.of(context),
-          decoration: decoration
+          decoration: decoration,
         ),
         clipBehavior: clipBehavior,
         child: current,
