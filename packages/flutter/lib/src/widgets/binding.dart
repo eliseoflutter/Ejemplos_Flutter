@@ -296,6 +296,14 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
     }());
   }
 
+  /// The current [WidgetsBinding], if one has been created.
+  ///
+  /// Provides access to the features exposed by this mixin. The binding must
+  /// be initialized before using this getter; this is typically done by calling
+  /// [runApp] or [WidgetsFlutterBinding.ensureInitialized].
+  static WidgetsBinding get instance => BindingBase.checkInstance(_instance);
+  static WidgetsBinding? _instance;
+
   void _debugAddStackFilters() {
     const PartialStackFrame elementInflateWidget = PartialStackFrame(package: 'package:flutter/src/widgets/framework.dart', className: 'Element', method: 'inflateWidget');
     const PartialStackFrame elementUpdateChild = PartialStackFrame(package: 'package:flutter/src/widgets/framework.dart', className: 'Element', method: 'updateChild');
@@ -376,14 +384,6 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
       replacement: replacementString,
     ));
   }
-
-  /// The current [WidgetsBinding], if one has been created.
-  ///
-  /// If you need the binding to be constructed before calling [runApp],
-  /// you can ensure a Widget binding has been constructed by calling the
-  /// `WidgetsFlutterBinding.ensureInitialized()` function.
-  static WidgetsBinding? get instance => _instance;
-  static WidgetsBinding? _instance;
 
   @override
   void initServiceExtensions() {
@@ -494,7 +494,7 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
           },
       );
 
-      WidgetInspectorService.instance.initServiceExtensions(registerServiceExtension);
+      WidgetInspectorService.instance!.initServiceExtensions(registerServiceExtension);
 
       return true;
     }());
@@ -952,7 +952,7 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
   @override
   Future<void> performReassemble() {
     assert(() {
-      WidgetInspectorService.instance.performReassemble();
+      WidgetInspectorService.instance!.performReassemble();
       return true;
     }());
 
@@ -1033,10 +1033,9 @@ void runApp(Widget app) {
 }
 
 String _debugDumpAppString() {
-  assert(WidgetsBinding.instance != null);
-  const String mode = kDebugMode ? 'DEBUG MODE' : 'PROFILE MODE';
+  const String mode = kDebugMode ? 'DEBUG MODE' : kReleaseMode ? 'RELEASE MODE' : 'PROFILE MODE';
   final StringBuffer buffer = StringBuffer();
-  buffer.writeln('${WidgetsBinding.instance.runtimeType} - $mode');
+  buffer.writeln('${WidgetsBinding.instance!.runtimeType} - $mode');
   if (WidgetsBinding.instance!.renderViewElement != null) {
     buffer.writeln(WidgetsBinding.instance!.renderViewElement!.toStringDeep());
   } else {
@@ -1047,8 +1046,7 @@ String _debugDumpAppString() {
 
 /// Print a string representation of the currently running app.
 void debugDumpApp() {
-  final String value = _debugDumpAppString();
-  debugPrint(value);
+  debugPrint(_debugDumpAppString());
 }
 
 /// A bridge from a [RenderObject] to an [Element] tree.
@@ -1229,21 +1227,33 @@ class RenderObjectToWidgetElement<T extends RenderObject> extends RootRenderObje
 /// A concrete binding for applications based on the Widgets framework.
 ///
 /// This is the glue that binds the framework to the Flutter engine.
+///
+/// When using the widgets framework, this binding, or one that
+/// implements the same interfaces, must be used. The following
+/// mixins are used to implement this binding:
+///
+/// * [GestureBinding], which implements the basics of hit testing.
+/// * [SchedulerBinding], which introduces the concepts of frames.
+/// * [ServicesBinding], which provides access to the plugin subsystem.
+/// * [PaintingBinding], which enables decoding images.
+/// * [SemanticsBinding], which supports accessibility.
+/// * [RendererBinding], which handles the render tree.
+/// * [WidgetsBinding], which handles the widget tree.
 class WidgetsFlutterBinding extends BindingBase with GestureBinding, SchedulerBinding, ServicesBinding, PaintingBinding, SemanticsBinding, RendererBinding, WidgetsBinding {
-
-  /// Returns an instance of the [WidgetsBinding], creating and
-  /// initializing it if necessary. If one is created, it will be a
-  /// [WidgetsFlutterBinding]. If one was previously initialized, then
-  /// it will at least implement [WidgetsBinding].
+  /// Returns an instance of the binding that implements
+  /// [WidgetsBinding]. If no binding has yet been initialized, the
+  /// [WidgetsFlutterBinding] class is used to create and initialize
+  /// one.
   ///
   /// You only need to call this method if you need the binding to be
   /// initialized before calling [runApp].
   ///
   /// In the `flutter_test` framework, [testWidgets] initializes the
   /// binding instance to a [TestWidgetsFlutterBinding], not a
-  /// [WidgetsFlutterBinding].
+  /// [WidgetsFlutterBinding]. See
+  /// [TestWidgetsFlutterBinding.ensureInitialized].
   static WidgetsBinding ensureInitialized() {
-    if (WidgetsBinding.instance == null)
+    if (WidgetsBinding._instance == null)
       WidgetsFlutterBinding();
     return WidgetsBinding.instance!;
   }
