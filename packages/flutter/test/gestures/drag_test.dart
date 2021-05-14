@@ -1016,12 +1016,12 @@ void main() {
       logs.clear();
 
       tester.route(pointer1.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer1.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer1.pointer);
       expect(logs, <String>['downT', 'upT']);
       logs.clear();
 
       tester.route(pointer2.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer2.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer2.pointer);
       expect(logs, <String>['cancelH']);
       logs.clear();
     },
@@ -1069,13 +1069,13 @@ void main() {
       logs.clear();
 
       tester.route(pointer2.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer2.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer2.pointer);
       // Tap is not triggered because pointer2 is not its primary pointer
       expect(logs, <String>[]);
       logs.clear();
 
       tester.route(pointer1.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer1.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer1.pointer);
       expect(logs, <String>['cancelH', 'downT', 'upT']);
       logs.clear();
     },
@@ -1127,12 +1127,12 @@ void main() {
       logs.clear();
 
       tester.route(pointer2.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer2.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer2.pointer);
       expect(logs, <String>[]);
       logs.clear();
 
       tester.route(pointer1.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer1.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer1.pointer);
       expect(logs, <String>['endH']);
       logs.clear();
     },
@@ -1180,7 +1180,7 @@ void main() {
       logs.clear();
 
       tester.route(pointer1.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer1.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer1.pointer);
       expect(logs, <String>['downT', 'upT']);
       logs.clear();
 
@@ -1189,7 +1189,7 @@ void main() {
       logs.clear();
 
       tester.route(pointer2.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer2.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer2.pointer);
       expect(logs, <String>['endH']);
       logs.clear();
     },
@@ -1245,7 +1245,7 @@ void main() {
       logs.clear();
 
       tester.route(pointer2.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer2.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer2.pointer);
       expect(logs, <String>['endH']);
       logs.clear();
     },
@@ -1307,7 +1307,7 @@ void main() {
       logs.clear();
 
       tester.route(pointer2.up());
-      GestureBinding.instance!.gestureArena.sweep(pointer2.pointer);
+      GestureBinding.instance.gestureArena.sweep(pointer2.pointer);
       expect(logs, <String>[]);
 
       tester.route(pointer4.cancel());

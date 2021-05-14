@@ -951,7 +951,7 @@ class RawScrollbarState<T extends RawScrollbar> extends State<T> with TickerProv
   // This allows the thumb to show immediately when isAlwaysShown is true.
   // A scroll event is required in order to paint the thumb.
   void _maybeTriggerScrollbar() {
-    WidgetsBinding.instance!.addPostFrameCallback((Duration duration) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration duration) {
       if (showScrollbar) {
         _fadeoutTimer?.cancel();
         // Wait one frame and cause an empty scroll event.  This allows the

@@ -1461,21 +1461,21 @@ class FocusManager with DiagnosticableTreeMixin, ChangeNotifier {
   void registerGlobalHandlers() {
     assert(RawKeyboard.instance.keyEventHandler == null);
     RawKeyboard.instance.keyEventHandler = _handleRawKeyEvent;
-    GestureBinding.instance!.pointerRouter.addGlobalRoute(_handlePointerEvent);
+    GestureBinding.instance.pointerRouter.addGlobalRoute(_handlePointerEvent);
   }
 
   @override
   void dispose() {
     if (RawKeyboard.instance.keyEventHandler == _handleRawKeyEvent) {
       RawKeyboard.instance.keyEventHandler = null;
-      GestureBinding.instance!.pointerRouter.removeGlobalRoute(_handlePointerEvent);
+      GestureBinding.instance.pointerRouter.removeGlobalRoute(_handlePointerEvent);
     }
     super.dispose();
   }
 
   /// Provides convenient access to the current [FocusManager] singleton from
   /// the [WidgetsBinding] instance.
-  static FocusManager get instance => WidgetsBinding.instance!.focusManager;
+  static FocusManager get instance => WidgetsBinding.instance.focusManager;
 
   /// Sets the strategy by which [highlightMode] is determined.
   ///
@@ -1518,7 +1518,7 @@ class FocusManager with DiagnosticableTreeMixin, ChangeNotifier {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
       case TargetPlatform.iOS:
-        if (WidgetsBinding.instance!.mouseTracker.mouseIsConnected) {
+        if (WidgetsBinding.instance.mouseTracker.mouseIsConnected) {
           return FocusHighlightMode.traditional;
         }
         return FocusHighlightMode.touch;
@@ -1817,7 +1817,7 @@ class FocusManager with DiagnosticableTreeMixin, ChangeNotifier {
 
 /// Provides convenient access to the current [FocusManager.primaryFocus] from the
 /// [WidgetsBinding] instance.
-FocusNode? get primaryFocus => WidgetsBinding.instance!.focusManager.primaryFocus;
+FocusNode? get primaryFocus => WidgetsBinding.instance.focusManager.primaryFocus;
 
 /// Returns a text representation of the current focus tree, along with the
 /// current attributes on each node.

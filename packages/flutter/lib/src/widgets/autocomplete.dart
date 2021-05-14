@@ -830,7 +830,7 @@ class _RawAutocompleteState<T extends Object> extends State<RawAutocomplete<T>> 
     _textEditingController.addListener(_onChangedField);
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onChangedFocus);
-    SchedulerBinding.instance!.addPostFrameCallback((Duration _) {
+    SchedulerBinding.instance.addPostFrameCallback((Duration _) {
       _updateOverlay();
     });
   }
@@ -843,7 +843,7 @@ class _RawAutocompleteState<T extends Object> extends State<RawAutocomplete<T>> 
       widget.textEditingController,
     );
     _updateFocusNode(oldWidget.focusNode, widget.focusNode);
-    SchedulerBinding.instance!.addPostFrameCallback((Duration _) {
+    SchedulerBinding.instance.addPostFrameCallback((Duration _) {
       _updateOverlay();
     });
   }

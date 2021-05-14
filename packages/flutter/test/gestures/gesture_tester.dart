@@ -22,11 +22,11 @@ class GestureTester {
   final FakeAsync async;
 
   void closeArena(int pointer) {
-    GestureBinding.instance!.gestureArena.close(pointer);
+    GestureBinding.instance.gestureArena.close(pointer);
   }
 
   void route(PointerEvent event) {
-    GestureBinding.instance!.pointerRouter.route(event);
+    GestureBinding.instance.pointerRouter.route(event);
     async.flushMicrotasks();
   }
 }

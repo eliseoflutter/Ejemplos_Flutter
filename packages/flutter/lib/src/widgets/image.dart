@@ -120,7 +120,7 @@ Future<void> precacheImage(
       // Give callers until at least the end of the frame to subscribe to the
       // image stream.
       // See ImageCache._liveImages
-      SchedulerBinding.instance!.addPostFrameCallback((Duration timeStamp) {
+      SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
         stream.removeListener(listener!);
       });
     },
@@ -1099,14 +1099,14 @@ class _ImageState extends State<Image> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     _scrollAwareContext = DisposableBuildContext<State<Image>>(this);
   }
 
   @override
   void dispose() {
     assert(_imageStream != null);
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _stopListeningToStream();
     _completerHandle?.dispose();
     _scrollAwareContext.dispose();
@@ -1156,7 +1156,7 @@ class _ImageState extends State<Image> with WidgetsBindingObserver {
 
   void _updateInvertColors() {
     _invertColors = MediaQuery.maybeOf(context)?.invertColors
-        ?? SemanticsBinding.instance!.accessibilityFeatures.invertColors;
+        ?? SemanticsBinding.instance.accessibilityFeatures.invertColors;
   }
 
   void _resolveImage() {
